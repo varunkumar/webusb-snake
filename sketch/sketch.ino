@@ -132,6 +132,8 @@ void drawBorder() {
 }
 
 void initGame() {
+  Serial.println("Starting new game...");
+  Serial.flush();
   food = 3;
   direction = 4;
   drawBorder();
@@ -152,16 +154,32 @@ void changeDirection(char key) {
     */
   switch (key) {
     case 'w':
-      if (direction != 3) direction = 1;
+      if (direction != 3) {
+        direction = 1;
+        Serial.println("Snake direction changed. Going up...");
+        Serial.flush();
+      }
       break;
     case 'd':
-      if (direction != 4) direction = 2;
+      if (direction != 4) {
+        direction = 2;
+        Serial.println("Snake direction changed. Going right...");
+        Serial.flush();
+      }
       break;
     case 's':
-      if (direction != 1) direction = 3;
+      if (direction != 1) {
+        direction = 3;
+        Serial.println("Snake direction changed. Going down...");
+        Serial.flush();
+      }
       break;
     case 'a':
-      if (direction != 2) direction = 4;
+      if (direction != 2) {
+        direction = 4;
+        Serial.println("Snake direction changed. Going left...");
+        Serial.flush();
+      }
       break;
   }
 }
