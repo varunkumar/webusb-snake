@@ -15,6 +15,12 @@ Pre-requisites
 - [Arduino Leonardo](https://store.arduino.cc/arduino-leonardo-with-headers) (You can use other [compatible boards](https://github.com/webusb/arduino) as well)
 - [TFT LCD screen](https://roboindia.com/tutorials/direct.php?route=2.4-touch-lcd-arduino)
 
+![Arduino Uno board with TFT LCD Screen shield] (./demo/board.HEIC)
+
+![Device selection] (./demo/device-selection.png)
+
+![Web page using WebUSB API] (./demo/webpage.png)
+
 Browser support
 ---------------
 WebUSB API is currently available in Chrome only. Tested in Chrome 62.
