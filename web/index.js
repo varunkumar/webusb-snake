@@ -53,6 +53,10 @@
         }
       }
     });
+    document.querySelector('.up').addEventListener('click', () => sendData('w'.charCodeAt(0)));
+    document.querySelector('.down').addEventListener('click', () => sendData('s'.charCodeAt(0)));
+    document.querySelector('.left').addEventListener('click', () => sendData('a'.charCodeAt(0)));
+    document.querySelector('.right').addEventListener('click', () => sendData('d'.charCodeAt(0)));
 
     // Log data to page
     function log(data, source) {
