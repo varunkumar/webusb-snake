@@ -201,6 +201,9 @@ void move(int8_t dx, int8_t dy) {
       }
     }
 
+    Serial.println("Snake has grown in size...");
+    Serial.flush();
+
     // Increase food value (body length)
     food++;
 
@@ -211,6 +214,8 @@ void move(int8_t dx, int8_t dy) {
   // Check location is free
   else if (snakeMap[newx + newy * MAP_WIDTH] != 0) {
     running = false;
+    Serial.println("Game over");
+    Serial.flush();
   }
 
   // Move head to new location
