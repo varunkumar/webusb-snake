@@ -15,7 +15,10 @@ Pre-requisites
 - [Arduino Leonardo](https://store.arduino.cc/arduino-leonardo-with-headers) (You can use other [compatible boards](https://github.com/webusb/arduino) as well)
 - [TFT LCD screen](https://roboindia.com/tutorials/direct.php?route=2.4-touch-lcd-arduino)
 
+Screenshots
+-----------
 ![Arduino Uno board with TFT LCD Screen shield](./demo/board.png)
+![Arduino Uno board with TFT LCD Screen shield](./demo/board1.png)
 
 ![Device selection](./demo/device-selection.png)
 
