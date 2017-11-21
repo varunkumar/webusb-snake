@@ -91,3 +91,22 @@ li.button {
   display: inline-block;
   margin-top: 10px;
 }
+
+.log-item {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.log-item .time {
+  color: rgb(98, 150, 230);
+  padding-right: 10px;
+}
+
+.log-item .source {
+  color: rgb(206, 145, 120);
+  padding-right: 10px;
+}
+
+.log-item .data {
+  color: rgb(210, 210, 210);
+}

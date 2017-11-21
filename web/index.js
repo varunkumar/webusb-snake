@@ -1,65 +1,78 @@
 (function () {
   'use strict';
 
-  document.addEventListener('DOMContentLoaded', event => {
+  document.addEventListener('DOMContentLoaded', async event => {
     const connectButton = document.querySelector('#connect');
     const statusDisplay = document.querySelector('#status');
-    const logsContainer = document.querySelector('.output-container');
     let port;
 
-    function connect() {
-      port.connect().then(() => {
+    // Connect to the selected USB device and setup receive hooks
+    async function connect() {
+      try {
+        await port.connect();
         statusDisplay.textContent = '';
         connectButton.textContent = 'Disconnect';
 
         port.onReceive = data => {
           let textDecoder = new TextDecoder();
-          logsContainer.innerHTML = logsContainer.innerHTML + '<br/>' + textDecoder.decode(data);
+          log(textDecoder.decode(data), port.device_.productName);
         }
         port.onReceiveError = error => {
           console.error(error);
         };
-      }, error => {
+      } catch (error) {
         statusDisplay.textContent = error;
-      });
+      }
     }
 
-    function onUpdate(e) {
+    // Send data to USB device
+    function sendData(key) {
       if (!port) {
         return;
       }
 
-      let view = new Uint8Array(1);
-      view[0] = parseInt(e.charCode);
+      const view = new Uint8Array(1);
+      view[0] = parseInt(key);
       port.send(view);
     };
 
-    document.addEventListener('keypress', onUpdate);
-
-    connectButton.addEventListener('click', function () {
+    // Attach listeners
+    document.addEventListener('keypress', event => sendData(event.charCode));
+    connectButton.addEventListener('click', async function () {
       if (port) {
         port.disconnect();
         connectButton.textContent = 'Connect';
         statusDisplay.textContent = '';
         port = null;
       } else {
-        serial.requestPort().then(selectedPort => {
-          port = selectedPort;
+        try {
+          port = await serial.requestPort();
           connect();
-        }).catch(error => {
+        } catch (error) {
           statusDisplay.textContent = error;
-        });
+        }
       }
     });
 
-    serial.getPorts().then(ports => {
-      if (ports.length == 0) {
-        statusDisplay.textContent = 'No device found.';
-      } else {
-        statusDisplay.textContent = 'Connecting...';
-        port = ports[0];
-        connect();
-      }
-    });
+    // Log data to page
+    function log(data, source) {
+      const logsContainer = document.querySelector('.output-container');
+      const logItem = document.importNode(document.querySelector('#log-item-template').content, true);
+      logItem.querySelector('.time').textContent = `[${new Date()}]`;
+      logItem.querySelector('.source').textContent = `[${source}]`;
+      logItem.querySelector('.data').textContent = data;
+      logsContainer.appendChild(logItem);
+      logsContainer.scrollTop = logsContainer.scrollHeight;
+    }
+
+    // Show connectivity status
+    const ports = await serial.getPorts();
+    if (ports.length == 0) {
+      statusDisplay.textContent = 'No device found.';
+    } else {
+      statusDisplay.textContent = 'Connecting...';
+      port = ports[0];
+      connect();
+    }
   });
 })();
