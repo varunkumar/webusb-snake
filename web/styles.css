@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: url('./background.jpg');
+  background-size: cover;
+  position: absolute;
+  font-family: sans-serif;
+}
+
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-self: center;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-column: 2;
+}
+
+.button {
+  background-color: #f1f1f1;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 10px rgba(0,0,0,.3);
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover {
+  box-shadow: none;
+}
+
+li {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+
+li.button {
+  padding: 0px;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: auto auto 2fr;
+  align-items: center;
+  grid-row-gap: 20px;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.connect-container {
+  align-self: flex-end;
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.up {
+  grid-column: 1 / 4;
+  justify-self: center;
+}
+
+.output-container {
+  border: solid 1px #eee;
+  background: #000000;
+  grid-row: 3;
+  grid-column: 1/4;
+  max-height: 100%;
+  min-height: 300px;
+  margin: 0px 100px 0px 100px;
+  color: #eee;
+  padding: 10px;
+  overflow: auto;
+  align-self: flex-start;
+}
+
+#status {
+  display: inline-block;
+  margin-top: 10px;
+}
